@@ -1,6 +1,3 @@
-// Project2.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <stdio.h>
 #include <vector>
@@ -11,72 +8,95 @@ char encodingChars(int key, char character);
 int encodingInts(int key, int value);
 double encodingDoubles(int key, double var);
 void encodingDoubleArray(int key, double doublearray[], double newArray[]);
+void encoder(double XP, int doubloons, string characterName, string villainName, char combatRating, char npcStanding, int numOfLives, double distanceTraveled, int enemiesSlain);
 
 
 
 int main()
 {
-	string word;
-	char charas;
-	int enemies;
-	double val;
-	
-	double levelComplete[10] = { 90.9, 23.2, 45.2, 100.0, 56.0, 0.0, 65.5, 0.0, 10.0, 32.0 };
-	double newArray[sizeof(levelComplete)];
+	double levelComplete[10] = { 90.9, 23.2, 45.2, 100, 56.3, 0, 65.5, 0, 10.7, 32.4 };
+	double enc_Arr[10];
 	double XP = 32.7;
 	int doubloons = 7001;
 	string characterName = "Leroy Jenkins";
 	string villainName = "Thanos";
-	vector<string> weapons;
-	char difficultyLevel = 'H';
+	char combatRating = 'B';
+	char npcStanding = 'F';
 	int numOfLives = 2;
 	double distanceTraveled = 356.98;
 	int enemiesSlain = 1500;
-	word=encodingStrings(1, characterName);
-	cout << word << endl;
-	charas = encodingChars(1, difficultyLevel);
-	cout << charas << endl;
-	enemies=encodingInts(5672, enemiesSlain);
-	cout << enemies << endl;
-	cout << encodingInts(5672, enemies) << endl;
-	val = encodingDoubles(3824, XP);
-	cout << val << endl;
-	cout << encodingDoubles(3824, val) << endl;
-	//cout << encodingDoubleArray(3452, levelComplete)<<endl;
-	encodingDoubleArray(3453, levelComplete,newArray);
-	
-	
-	
+
+	cout << "Levels Completeness: " << endl;
+	encodingDoubleArray(3574, levelComplete, enc_Arr);
+	encoder(XP, doubloons, characterName, villainName, combatRating, npcStanding, numOfLives, distanceTraveled, enemiesSlain);
 	
 }
 
+void encoder(double XP, int doubloons, string characterName, string villainName, char combatRating, char npcStanding, int numOfLives, double distanceTraveled, int enemiesSlain) {
+	
+	//encode XP
+	double enc_XP = encodingDoubles(3824, XP);
+
+	//encode doubloons
+	double enc_doubloons = encodingInts(5672, doubloons);
+
+	//encode character name
+	string enc_charName = encodingStrings(5, characterName);
+
+	//encode villian name
+	string enc_Villian = encodingStrings(13, villainName);
+
+	//encode combat rating Standing
+	char enc_combatRating = encodingChars(9, combatRating);
+
+	// encode NPC Standing
+	char enc_npcStanding = encodingChars(7, npcStanding);
+
+	//encode number of lives
+	int enc_numOfLives = encodingInts(869, numOfLives);
+
+	//encode distance Traveled
+	double enc_distance = encodingDoubles(4567, distanceTraveled);
+
+	//encode enemies slainr
+	int enc_slain = encodingInts(5672, enemiesSlain);
+
+	//Printing for testing purposes:
+	cout << "\nXP: " << enc_XP << endl;
+	cout << "doubloons: " <<  enc_doubloons << endl;
+	cout << "Character Name: " << enc_charName << endl;
+	cout << "Villian: " << enc_Villian << endl;
+	cout << "Combat Rating; " << enc_combatRating << endl;
+	cout << "npcStanding: " << enc_npcStanding << endl;
+	cout << "Number of Lives: " << enc_numOfLives << endl;
+	cout << "Distance Traveled: " << enc_distance << endl;
+	cout << "Enemies Slain: " << enc_slain << endl;
+}
 
 double encodingDoubles(int key, double var)
 {
-	int castedVar =var* 100;
-	double newVar = castedVar^ key;
+	int castedVar = var * 100;
+	double newVar = castedVar ^ key;
 	newVar = newVar / 100;
 	return newVar;
 }
 
-void encodingDoubleArray(int key,double doublearray[],double newArray[])
+void encodingDoubleArray(int key, double doublearray[], double newArray[])
 {
-	int castedArrayVal;
+	double castedArrayVal;
 	for (int i = 0; i < 10; i++)
 	{
 		castedArrayVal = encodingDoubles(key, doublearray[i]);
 		newArray[i] = castedArrayVal;
+		//Printing for testing
 		cout << newArray[i]<<" ";
-		
 	}
-	return;
-	
-
+	return;	
 }
-int encodingInts(int key,int value)
+
+int encodingInts(int key, int value)
 {
-	int newValue=value^ key;
-	
+	int newValue = value ^ key;
 	return newValue;
 }
 
@@ -94,28 +114,22 @@ string encodingStrings(int key, string name)
 				break;
 			}
 		}
-		
 	}
 	return newName;
 }
+
 char encodingChars(int key, char character)
 {
 	char newChar = character;
 	char letters[52] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Y','Z' };
-	
-		for (int k = 0; k < 52; k++)
+
+	for (int k = 0; k < 52; k++)
+	{
+		if (character == letters[k])
 		{
-			if (character == letters[k])
-			{
-				newChar = letters[((k + key) % 52)];
-				break;
-			}
+			newChar = letters[((k + key) % 52)];
+			break;
 		}
-
-	
+	}
 	return newChar;
-	
 }
-
-
-
