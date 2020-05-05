@@ -27,7 +27,7 @@ int main()
 	int enemiesSlain = 1500;
 
 	cout << "Levels Completeness: " << endl;
-	encodingDoubleArray(3574, levelComplete, enc_Arr);
+	encodingDoubleArray(5672, levelComplete, enc_Arr);
 	encoder(XP, doubloons, characterName, villainName, combatRating, npcStanding, numOfLives, distanceTraveled, enemiesSlain);
 	
 }
@@ -35,28 +35,28 @@ int main()
 void encoder(double XP, int doubloons, string characterName, string villainName, char combatRating, char npcStanding, int numOfLives, double distanceTraveled, int enemiesSlain) {
 	
 	//encode XP
-	double enc_XP = encodingDoubles(3824, XP);
+	double enc_XP = encodingDoubles(5672, XP);
 
 	//encode doubloons
 	double enc_doubloons = encodingInts(5672, doubloons);
 
 	//encode character name
-	string enc_charName = encodingStrings(5, characterName);
+	string enc_charName = encodingStrings(13, characterName);
 
 	//encode villian name
 	string enc_Villian = encodingStrings(13, villainName);
 
 	//encode combat rating Standing
-	char enc_combatRating = encodingChars(9, combatRating);
+	char enc_combatRating = encodingChars(13, combatRating);
 
 	// encode NPC Standing
-	char enc_npcStanding = encodingChars(7, npcStanding);
+	char enc_npcStanding = encodingChars(13, npcStanding);
 
 	//encode number of lives
-	int enc_numOfLives = encodingInts(869, numOfLives);
+	int enc_numOfLives = encodingInts(5672, numOfLives);
 
 	//encode distance Traveled
-	double enc_distance = encodingDoubles(4567, distanceTraveled);
+	double enc_distance = encodingDoubles(5672, distanceTraveled);
 
 	//encode enemies slainr
 	int enc_slain = encodingInts(5672, enemiesSlain);
